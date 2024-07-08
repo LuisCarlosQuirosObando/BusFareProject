@@ -13,16 +13,16 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "id_user")
 
-    private Long idUsuario;
-
+    private Long idUser;
     private String usuario;
     private String contrasena;
     private String nombre;
     private String apellidos;
     private String correo;
     private boolean activo;
+    private int intentosFallidos;
 
     public Usuario() {
     }
@@ -34,6 +34,7 @@ public class Usuario implements Serializable {
         this.apellidos = apellidos;
         this.correo = correo;
         this.activo = activo;
+        this.intentosFallidos=0;
     }
     
       

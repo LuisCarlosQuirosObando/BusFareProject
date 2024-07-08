@@ -9,7 +9,7 @@
         <section th:fragment="headerLog" class="header">
             <nav class="navbar navbar-expand-sm navbar-dark bg-info p-0">
                 <div class="container">
-                    <a th:href="@{/principal}" class="navbar-brand" style="font-size: 3.5em; color: white;">[[#{aplicacion.titulo}]]</a>
+                    <a th:href="@{/}" class="navbar-brand" style="font-size: 3.5em; color: white;">[[#{aplicacion.titulo}]]</a>
                     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -68,7 +68,7 @@
                                 <h3 class="text-center">[[#{registro.titulo}]]</h3>
                             </div>
                             <div class="card-body">
-                                <form th:action="@{/registro/guardar}" th:object="${usuario}" method="post">
+                                <form th:action="@{/registro/guardar}" th:object="${usuario}" method="POST" class="was-validated" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="usuario">[[#{registro.usuario}]]</label>
                                         <input type="text" id="usuario" th:field="*{usuario}" class="form-control" placeholder="Ingrese su usuario" required>
