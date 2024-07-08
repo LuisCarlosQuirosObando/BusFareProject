@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">
+    </head>
+    <body>
+        <header th:replace="fragmentos :: headerLog"/>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">                   
+                    <section th:replace="fragmentos :: nuevaCuenta"/>                   
+                </div>
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer" />
+    </body>
+</html>

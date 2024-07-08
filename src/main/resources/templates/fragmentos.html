@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>BusFare</title>
+    </head>
+    <body>
+        <section th:fragment="headerLog" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-info p-0">
+                <div class="container">
+                    <a th:href="@{/principal}" class="navbar-brand" style="font-size: 3.5em; color: white;">[[#{aplicacion.titulo}]]</a>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">                       
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fs-4" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="color: white;">Lang</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item fs-4" th:href="@{/(lang=es)}">ES</a></li>
+                                    <li><a class="dropdown-item fs-4" th:href="@{/(lang=en)}">EN</a></li>
+                                </ul>
+                            </li>
+                        </ul>                        
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <section th:fragment="login">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-10"> 
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-center mb-4" style="font-size: 2.5rem;">[[#{login.inicio}]]</h3> 
+                            </div>
+                            <div class="card-body">
+                                <form action="/principal" method="post">
+                                    <div class="form-group">
+                                        <label for="username" style="font-size: 1.2rem;">[[#{login.usuario}]]</label> 
+                                        <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Ingrese su nombre de usuario" required>  
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" style="font-size: 1.2rem;">[[#{login.contrasena}]]</label> 
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Ingrese su contraseña" required> 
+                                    </div>                               
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4" style="font-size: 1.2rem;">[[#{login.inicio}]]</button> 
+                                </form>
+
+                                <div class="card-footer text-right mt-4">
+                                    <p class="text-muted mb-0">[[#{login.crearCuenta}]]<a href="/registro">[[#{login.clickAqui}]]</a></p> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="nuevaCuenta">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-center">[[#{registro.titulo}]]</h3>
+                            </div>
+                            <div class="card-body">
+                                <form th:action="@{/registro/guardar}" th:object="${usuario}" method="post">
+                                    <div class="form-group">
+                                        <label for="usuario">[[#{registro.usuario}]]</label>
+                                        <input type="text" id="usuario" th:field="*{usuario}" class="form-control" placeholder="Ingrese su usuario" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contrasena">[[#{registro.contrasena}]]</label>
+                                        <input type="password" id="contrasena" th:field="*{contrasena}" class="form-control" placeholder="Ingrese su contraseña" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nombre">[[#{registro.nombre}]]</label>
+                                        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese su nombre" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidos">[[#{registro.apellidos}]]</label>
+                                        <input type="text" id="apellidos" th:field="*{apellidos}" class="form-control" placeholder="Ingrese sus apellidos" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="correo">[[#{registro.correo}]]</label>
+                                        <input type="email" id="correo" th:field="*{correo}" class="form-control" placeholder="Ingrese su correo electrónico" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block mt-4">[[#{registro.registro}]]</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--    <section th:fragment="">
+                                    
+                </section>-->
+
+    </body>
+</html>
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">
+    </head>
+    <body>
+        <header th:replace="fragmentos :: headerLog"/>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">                   
+                    <section th:replace="fragmentos :: login"/>
+                    <div th:if="${param.error}" style="color: red;" class="row justify-content-center">
+                        Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer" />
+    </body>
+</html>
