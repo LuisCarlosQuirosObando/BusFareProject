@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>BusFare</title>
+    </head>
+    <body>
+        <section th:fragment="listadoRutas">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            </div>
+                            <div th:if="${rutas != null and !rutas.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>Nombre de la Ruta</th>
+                                            <th>Provincia</th>
+                                            <th>Cantidad de Estaciones</th>
+                                            <th>Activo</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="ruta : ${rutas}">
+                                            <td>[[${ruta.idRuta}]]</td>
+                                            <td>[[${ruta.nombreRuta}]]</td>
+                                            <td>[[${ruta.provincia}]]</td>
+                                            <td>[[${ruta.cantidadEstaciones}]]</td>
+                                            <td th:text="${ruta.activo} ? 'Activa' : 'Inactiva'"></td>
+                                            <td>
+                                                <a th:href="@{/ruta/modificar/}+${ruta.idRuta}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> Actualizar</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${rutas == null or rutas.empty}">
+                                <span>No hay rutas disponibles.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3>Total Rutas</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${#lists.size(rutas)}]]</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

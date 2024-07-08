@@ -1,4 +1,5 @@
 package com.BusFare.dao;
+
 import com.BusFare.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
