@@ -49,7 +49,7 @@ public class RutaController {
 
     @PostMapping("/eliminar/{id}")
     public String eliminarRuta(@PathVariable("id") Long id, Model model) {
-        RutaService.eliminarRuta(id);
+        rutaService.eliminarRuta(id);
         return "redirect:/ruta"; 
     }
 }
