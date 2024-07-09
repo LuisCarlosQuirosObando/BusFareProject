@@ -24,7 +24,7 @@ public class RutaController {
     public String listarRutas(Model model) {
         List<Ruta> rutas = rutaService.findAll();
         model.addAttribute("rutas", rutas);
-        return "ruta/ruta"; // Asegúrate de que esta ruta sea correcta
+        return "rutas/ruta"; // Asegúrate de que esta ruta sea correcta
     }
 
     @GetMapping("/agregar")
@@ -48,8 +48,8 @@ public class RutaController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarRuta(@PathVariable("id") Long id, Model model) {
+    public String eliminarRuta(@PathVariable("id") Long id) {
         rutaService.eliminarRuta(id);
-        return "redirect:/ruta"; 
+        return "redirect:/ruta";
     }
 }
