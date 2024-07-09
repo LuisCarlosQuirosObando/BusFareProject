@@ -11,38 +11,43 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "rutas")
-
-public class Rutas implements Serializable {
+public class Ruta implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ruta")
-    
-    private Long idRuta;
-    private String nombreRuta;
+    private int id_ruta;
+
+    @Column(name = "nombre_ruta")
+    private String nombre_ruta;
+
+    @Column(name = "provincia")
     private String provincia;
-    private int cantidadEstaciones;
+    
+    @Column(name = "cantidad_estaciones")
+    private int cantidad_estaciones;
+
+    @Column(name = "activo")
     private boolean activo;
 
-    public Rutas() {
+    // Getters y setters
+
+    public int getId_ruta() {
+        return id_ruta;
     }
 
-    public Rutas(String nombreRuta, String provincia, int cantidadEstaciones, boolean activo) {
-        this.nombreRuta = nombreRuta;
-        this.provincia = provincia;
-        this.cantidadEstaciones = cantidadEstaciones;
-        this.activo = activo;
+    public void setId_ruta(int id_ruta) {
+        this.id_ruta = id_ruta;
     }
 
-    
-    public String getNombreRuta() {
-        return nombreRuta;
+    public String getNombre_ruta() {
+        return nombre_ruta;
     }
 
-    public void setNombreRuta(String nombreRuta) {
-        this.nombreRuta = nombreRuta;
+    public void setNombre_ruta(String nombre_ruta) {
+        this.nombre_ruta = nombre_ruta;
     }
 
     public String getProvincia() {
@@ -53,12 +58,12 @@ public class Rutas implements Serializable {
         this.provincia = provincia;
     }
 
-    public int getCantidadEstaciones() {
-        return cantidadEstaciones;
+    public int getCantidad_estaciones() {
+        return cantidad_estaciones;
     }
 
-    public void setCantidadEstaciones(int cantidadEstaciones) {
-        this.cantidadEstaciones = cantidadEstaciones;
+    public void setCantidad_estaciones(int cantidad_estaciones) {
+        this.cantidad_estaciones = cantidad_estaciones;
     }
 
     public boolean isActivo() {
@@ -68,5 +73,4 @@ public class Rutas implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-}
+}    

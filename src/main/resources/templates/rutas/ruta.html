@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/plantilla :: head">
@@ -6,7 +7,8 @@
 </head>
 <body>
     <header th:replace="layout/plantilla :: header"></header>
-    <section th:replace="templates.rutas/fragmentosRutas :: listadoRutas"></section>
+    <section th:replace="fragmentos :: botonesPrincipales"/>
+    <section th:replace="rutas/fragmentosRutas :: listadoRutas"></section>
     <footer th:replace="layout/plantilla :: footer"></footer>
 </body>
 </html>

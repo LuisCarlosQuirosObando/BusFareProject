@@ -7,45 +7,54 @@
     </head>
     <body>
         <section th:fragment="listadoRutas">
-            <div class="container">
+            <div class="container mt-5">
+                <div class="row mb-4">
+                    <div class="col text-center">
+                        <button type="button" onclick="window.location.href = '/ruta/agregar'" class="btn btn-primary" th:text="#{rutas.agregar}">Agregar</button>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col">
                         <div class="card">
-                            </div>
                             <div th:if="${rutas != null and !rutas.empty}">
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
-                                        <tr><th>#</th>
-                                            <th>Nombre de la Ruta</th>
-                                            <th>Provincia</th>
-                                            <th>Cantidad de Estaciones</th>
-                                            <th>Activo</th>
-                                            <th></th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="ruta : ${rutas}">
-                                            <td>[[${ruta.idRuta}]]</td>
-                                            <td>[[${ruta.nombreRuta}]]</td>
-                                            <td>[[${ruta.provincia}]]</td>
-                                            <td>[[${ruta.cantidadEstaciones}]]</td>
-                                            <td th:text="${ruta.activo} ? 'Activa' : 'Inactiva'"></td>
-                                            <td>
-                                                <a th:href="@{/ruta/modificar/}+${ruta.idRuta}"
-                                                   class="btn btn-success">
-                                                    <i class="fas fa-pencil"></i> Actualizar</a></td></tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover mx-auto">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th th:text="#{rutas.identificacion}">Identificación</th>
+                                                <th th:text="#{rutas.nombre}">Nombre</th>
+                                                <th th:text="#{rutas.provincia}">Apellidos</th>
+                                                <th th:text="#{rutas.cantidadEstaciones}">Licencia</th>
+                                                <th th:text="#{rutas.estado}">Estado</th>
+                                                <th class="text-center" th:text="#{rutas.acciones}">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="ruta : ${rutas}">
+                                                <td th:text="${rutas.id_ruta}">1</td>
+                                                <td th:text="${rutas.nombre}">Heredia</td>
+                                                <td th:text="${rutas.provincia}">Heredia</td>
+                                                <td th:text="${rutas.cantidadEstaciones}"15</td>
+                                                <td th:text="${rutas.activo} ? #{rutas.activo} : #{rutas.inactivo}">Activo</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a th:href="@{/ruta/editar/}+${ruta.id_ruta}" class="btn btn-success me-2">
+                                                            <i class="fas fa-pencil"></i> <span th:text="#{rutas.editar}">Editar</span>
+                                                        </a>
+                                                        <form th:action="@{/ruta/eliminar/}+${ruta.id_ruta}" method="posid_rutat" class="d-inline">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i> <span th:text="#{rutas.eliminar}">Eliminar</span>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="text-center p-2" th:if="${rutas == null or rutas.empty}">
-                                <span>No hay rutas disponibles.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card text-center bg-success text-white mb-3">
-                            <div class="card-body">
-                                <h3>Total Rutas</h3>
-                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${#lists.size(rutas)}]]</h4>
+                                <span th:text="#{rutas.noDisponible}">No hay rutas disponibles.</span>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">
+        <title>Editar Ruta</title>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center" th:text="#{rutas.editar}">Editar Ruta</h3>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
+                                <div class="mb-3">
+                                    <label for="nombre_ruta" class="form-label">Nombre Ruta</label>
+                                    <input type="text" id="nombre_ruta" class="form-control" th:field="*{nombre_ruta}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="provincia" class="form-label">Provincia</label>
+                                    <input type="text" id="provincia" class="form-control" th:field="*{provincia}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cantidad_estaciones" class="form-label">Cantidad Estaciones</label>
+                                    <select id="cantidad_estaciones" class="form-select" th:field="*{cantidad_estaciones}">
+                                    </select>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
+                                        <label for="activo" class="form-check-label">Activo</label>
+                                </div>
+                                <div class="d-grid gap-2 d-md-block text-center">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <a href="/ruta" class="btn btn-secondary">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>
