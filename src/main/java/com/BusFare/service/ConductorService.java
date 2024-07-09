@@ -24,8 +24,8 @@ public class ConductorService {
     public void save(Conductor conductor) {
         conductorDao.save(conductor);
     }
-    
-     public void eliminarConductor(Long id) {
+
+    public void eliminarConductor(Long id) {
         conductorDao.deleteById(id);
     }
 

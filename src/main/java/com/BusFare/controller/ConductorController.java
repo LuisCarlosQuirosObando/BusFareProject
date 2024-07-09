@@ -41,10 +41,10 @@ public class ConductorController {
 
     }
 
-     @PostMapping("/conductor/eliminar/{id}")
+    @PostMapping("/eliminar/{id}")
     public String eliminarConductor(@PathVariable("id") Long id, Model model) {
         conductorService.eliminarConductor(id);
-        return "redirect:/conductores"; // Redirigir a la lista de conductores después de eliminar
+        return "redirect:/conductor"; 
     }
-    
+
 }
