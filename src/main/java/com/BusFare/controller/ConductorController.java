@@ -24,7 +24,7 @@ public class ConductorController {
     public String listarConductores(Model model) {
         List<Conductor> conductores = conductorService.findAll();
         model.addAttribute("conductores", conductores);
-        return "conductor/conductor"; // Asegúrate de que esta ruta sea correcta
+        return "conductor/conductor"; 
     }
 
     @GetMapping("/agregar")

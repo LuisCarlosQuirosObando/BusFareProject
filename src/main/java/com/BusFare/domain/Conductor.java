@@ -32,7 +32,6 @@ public class Conductor implements Serializable {
     @Column(name = "activo")
     private boolean activo;
 
-    // Getters y setters
     public int getId_chofer() {
         return id_chofer;
     }

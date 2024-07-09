@@ -23,7 +23,7 @@ public class ClienteController {
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.findAll();
         model.addAttribute("clientes", clientes);
-        return "cliente/cliente"; // Asegúrate de que esta ruta sea correcta
+        return "cliente/cliente"; 
     }
 
     @GetMapping("/editar/{id}")
@@ -37,12 +37,11 @@ public class ClienteController {
     public String guardarCliente(@ModelAttribute("cliente") Cliente cliente) {
         clienteService.save(cliente);
         return "redirect:/cliente";
-
     }
 
      @PostMapping("/cliente/eliminar/{id}")
     public String eliminarCliente(@PathVariable("id") Long id, Model model) {
         clienteService.eliminarCliente(id);
-        return "redirect:/cliente"; // Redirigir a la lista de clientes después de eliminar
+        return "redirect:/cliente"; 
     }
 }

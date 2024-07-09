@@ -20,19 +20,12 @@ public class Ruta implements Serializable {
     @Column(name = "id_ruta")
     private int id_ruta;
 
-    @Column(name = "nombre_ruta")
     private String nombre_ruta;
-
-    @Column(name = "provincia")
     private String provincia;
-    
-    @Column(name = "cantidad_estaciones")
     private int cantidad_estaciones;
-
-    @Column(name = "activo")
     private boolean activo;
 
-    // Getters y setters
+    
 
     public int getId_ruta() {
         return id_ruta;

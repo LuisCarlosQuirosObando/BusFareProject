@@ -10,7 +10,7 @@
             <div class="container mt-5">
                 <div class="row mb-4">
                     <div class="col text-center">
-                        <button type="button" onclick="window.location.href = '/ruta/agregar'" class="btn btn-primary" th:text="#{rutas.agregar}">Agregar</button>
+                        <button type="button" onclick="window.location.href = '/ruta/agregar'" class="btn btn-primary" th:text="#{ruta.agregar}">Agregar</button>
                     </div>
                 </div>
                 <div class="row">
@@ -32,9 +32,9 @@
                                         <tbody>
                                             <tr th:each="ruta : ${rutas}">
                                                 <td th:text="${ruta.id_ruta}">1</td>
-                                                <td th:text="${ruta.nombre}">Bus</td>
+                                                <td th:text="${ruta.nombre_ruta}">Bus</td>
                                                 <td th:text="${ruta.provincia}">Heredia</td>
-                                                <td th:text="${ruta.cantidadEstaciones}">15</td>
+                                                <td th:text="${ruta.cantidad_estaciones}">15</td>
                                                 <td th:text="${ruta.activo} ? #{ruta.activo} : #{ruta.inactivo}">Activo</td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center">
