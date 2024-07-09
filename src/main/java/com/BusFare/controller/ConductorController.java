@@ -27,6 +27,13 @@ public class ConductorController {
         return "conductor/conductor"; // Asegúrate de que esta ruta sea correcta
     }
 
+    @GetMapping("/agregar")
+    public String mostrarFormularioAgregar(Model model) {
+        Conductor nuevoConductor = new Conductor();
+        model.addAttribute("conductor", nuevoConductor);
+        return "conductor/agregarConductor";
+    }
+
     @GetMapping("/editar/{id}")
     public String editarConductor(@PathVariable("id") Long id, Model model) {
         Conductor conductor = conductorService.findById(id);
@@ -38,7 +45,6 @@ public class ConductorController {
     public String guardarConductor(@ModelAttribute("conductor") Conductor conductor) {
         conductorService.save(conductor);
         return "redirect:/conductor";
-
     }
 
     @PostMapping("/eliminar/{id}")
@@ -46,5 +52,4 @@ public class ConductorController {
         conductorService.eliminarConductor(id);
         return "redirect:/conductor"; 
     }
-
 }

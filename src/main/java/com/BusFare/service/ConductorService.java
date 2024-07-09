@@ -1,7 +1,7 @@
 package com.BusFare.service;
 
-import com.BusFare.dao.ConductorDao;
 import com.BusFare.domain.Conductor;
+import com.BusFare.dao.ConductorDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +28,4 @@ public class ConductorService {
     public void eliminarConductor(Long id) {
         conductorDao.deleteById(id);
     }
-
 }
