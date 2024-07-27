@@ -34,10 +34,21 @@
                                 </ul>
                             </li>
                             <li class="nav-item px-3">
-                                <a class="nav-link fs-4" th:href="@{/}" style="color: white;">
+                                <a class="nav-link fs-4" href="#" onclick="confirmExit(event)" style="color: white;" th:data-url="@{/}">
                                     <i class="fas fa-sign-out-alt"></i> [[#{boton.salir}]]
                                 </a>
                             </li>
+                            <script>
+                                function confirmExit(event) {
+                                    event.preventDefault(); 
+                                    const url = event.currentTarget.getAttribute('data-url');
+                                    const userConfirmed = confirm('¿Está seguro que desea salir?');
+                                    if (userConfirmed) {
+                                        window.location.href = url;
+                                    }
+                                }
+                            </script>
+
                         </ul>                        
                     </div>
                 </div>

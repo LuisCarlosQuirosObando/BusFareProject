@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuarios")
+@Table(name="usuarios")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -14,8 +14,9 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-
     private Long idUser;
+    
+    
     private String usuario;
     private String contrasena;
     private String nombre;
