@@ -19,7 +19,6 @@ public class Ruta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ruta")
     private int id_ruta;
-
     private String nombre_ruta;
     private String provincia;
     private int cantidad_estaciones;

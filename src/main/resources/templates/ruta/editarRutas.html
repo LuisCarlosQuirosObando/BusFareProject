@@ -12,12 +12,13 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="text-center" th:text="#{rutas.editar}">Editar Ruta</h3>
+                            <h3 class="text-center" th:text="#{ruta.editar}">Editar</h3>
                         </div>
                         <div class="card-body">
                             <form th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
+                                <input type="hidden" th:field="*{id_ruta}">
                                 <div class="mb-3">
-                                    <label for="nombre_ruta" class="form-label">Nombre Ruta</label>
+                                    <label for="nombre_ruta" class="form-label">Nombre De La Ruta</label>
                                     <input type="text" id="nombre_ruta" class="form-control" th:field="*{nombre_ruta}" required>
                                 </div>
                                 <div class="mb-3">
@@ -25,9 +26,8 @@
                                     <input type="text" id="provincia" class="form-control" th:field="*{provincia}" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="cantidad_estaciones" class="form-label">Cantidad Estaciones</label>
-                                    <select id="cantidad_estaciones" class="form-select" th:field="*{cantidad_estaciones}">
-                                    </select>
+                                    <label for="cantidad_estaciones" class="form-label">Cantidad De Estaciones</label>
+                                    <input type="number" id="cantidad_estaciones" class="form-control" th:field="*{cantidad_estaciones}" required>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">

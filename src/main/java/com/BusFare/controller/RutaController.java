@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/ruta")
@@ -31,19 +32,20 @@ public class RutaController {
     public String mostrarFormularioAgregar(Model model) {
         Ruta nuevaRuta = new Ruta();
         model.addAttribute("ruta", nuevaRuta);
-        return "ruta/agregarRuta";
+        return "ruta/agregarRutas";
     }
 
     @GetMapping("/editar/{id}")
     public String editarRuta(@PathVariable("id") Long id, Model model) {
         Ruta ruta = rutaService.findById(id);
         model.addAttribute("ruta", ruta);
-        return "ruta/editarRuta";
+        return "ruta/editarRutas";
     }
 
     @PostMapping("/guardar")
-    public String guardarRuta(@ModelAttribute("ruta") Ruta ruta) {
+    public String guardarRuta(@ModelAttribute("ruta") Ruta ruta, RedirectAttributes redirectAttributes) {
         rutaService.save(ruta);
+        redirectAttributes.addFlashAttribute("mensaje", "Ruta guardada correctamente.");
         return "redirect:/ruta";
     }
 
