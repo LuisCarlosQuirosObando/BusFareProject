@@ -10,7 +10,12 @@
             <div class="container mt-5">
                 <div class="row mb-4">
                     <div class="col text-center">
-                        <button type="button" onclick="window.location.href = '/conductor/agregar'" class="btn btn-primary" th:text="#{conductores.agregar}">Agregar</button>
+                        <!--                        <button type="button" onclick="window.location.href = '/conductor/agregar'" class="btn btn-primary" th:text="#{conductores.agregar}">Agregar</button>-->
+                        <button type="button" onclick="window.location.href = '/conductor/agregar'" 
+                                style="padding: 15px 25px; font-size: 18px; width: 200px; background-color: #FFFFFF; color: black; border: none; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); cursor: pointer;" 
+                                onmouseover="this.style.backgroundColor = '#0DCAF0'; this.style.color = '#FFFFFF'" 
+                                onmouseout="this.style.backgroundColor = '#FFFFFF'; this.style.color = 'black'">
+                            Agregar
                     </div>
                 </div>
                 <div class="row">
@@ -83,29 +88,29 @@
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script>
-                            var conductorId;
+                                    var conductorId;
 
-                            function setConductorId(id) {
-                                conductorId = id;
-                                $('#confirmDeleteModal').modal('show');
-                            }
+                                    function setConductorId(id) {
+                                        conductorId = id;
+                                        $('#confirmDeleteModal').modal('show');
+                                    }
 
-                            document.addEventListener('DOMContentLoaded', function () {
-                                var confirmDeleteButton = document.getElementById('confirmDeleteButton');
-                                var deleteForm = document.getElementById('deleteForm');
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        var confirmDeleteButton = document.getElementById('confirmDeleteButton');
+                                        var deleteForm = document.getElementById('deleteForm');
 
-                                confirmDeleteButton.addEventListener('click', function () {
-                                    deleteForm.setAttribute('action', '/conductor/eliminar/' + conductorId);
-                                    deleteForm.submit();
-                                });
-                            });
-                            
-                            // Asegurarse de que los botones de cierre funcionen correctamente
-            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    $(this).closest('.modal').modal('hide');
-                });
-            });
+                                        confirmDeleteButton.addEventListener('click', function () {
+                                            deleteForm.setAttribute('action', '/conductor/eliminar/' + conductorId);
+                                            deleteForm.submit();
+                                        });
+                                    });
+
+                                    // botones de cierre
+                                    document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+                                        button.addEventListener('click', function () {
+                                            $(this).closest('.modal').modal('hide');
+                                        });
+                                    });
             </script>
         </section>
 
