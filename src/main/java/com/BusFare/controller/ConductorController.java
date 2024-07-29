@@ -24,7 +24,7 @@ public class ConductorController {
     public String listarConductores(Model model) {
         List<Conductor> conductores = conductorService.findAll();
         model.addAttribute("conductores", conductores);
-        return "conductor/conductor"; 
+        return "conductor/conductor";
     }
 
     @GetMapping("/agregar")
@@ -44,12 +44,13 @@ public class ConductorController {
     @PostMapping("/guardar")
     public String guardarConductor(@ModelAttribute("conductor") Conductor conductor) {
         conductorService.save(conductor);
+        System.out.println(conductor.toString());
         return "redirect:/conductor";
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarConductor(@PathVariable("id") Long id, Model model) {
+    public String eliminarConductor(@PathVariable("id") Long id) {
         conductorService.eliminarConductor(id);
-        return "redirect:/conductor"; 
+        return "redirect:/conductor";
     }
 }

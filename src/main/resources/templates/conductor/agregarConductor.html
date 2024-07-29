@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Agregar Conductor</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"></header>
@@ -15,7 +15,7 @@
                             <h3 th:text="#{conductores.agregar}">Agregar Conductor</h3>
                         </div>
                         <div class="card-body">
-                            <form th:action="@{/conductor/guardar}" th:object="${conductor}" method="post">
+                            <form id="agregarConductorForm" th:action="@{/conductor/guardar}" th:object="${conductor}" method="post">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="text" id="nombre" class="form-control" th:field="*{nombre}" required>
@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="licencia" class="form-label">Licencia</label>
-                                    <select id="licencia" class="form-select" th:field="*{licencia}">
+                                    <select id="licencia" class="form-select" th:field="*{licencia}" required>
                                         <option value="true" th:text="#{conductores.si}">Si</option>
                                         <option value="false" th:text="#{conductores.no}">No</option>
                                     </select>
@@ -36,7 +36,7 @@
                                         <label for="activo" class="form-check-label">Activo</label>
                                 </div>
                                 <div class="d-grid gap-2 d-md-block text-center">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="button" class="btn btn-primary" id="saveButton">Guardar</button>
                                     <a href="/conductor" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </form>
@@ -45,6 +45,72 @@
                 </div>
             </div>
         </div>
-        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+
+        <!-- Modal de confirmación -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea agregar este conductor?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="confirmButton">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de alerta de campos vacíos -->
+        <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="alertModalLabel">Campos incompletos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        No es posible continuar porque hay campos en blanco.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.getElementById('saveButton').addEventListener('click', function () {
+                var form = document.getElementById('agregarConductorForm');
+                var valid = form.checkValidity();
+                if (valid) {
+                    $('#confirmModal').modal('show');
+                } else {
+                    $('#alertModal').modal('show');
+                }
+            });
+
+            document.getElementById('confirmButton').addEventListener('click', function () {
+                document.getElementById('agregarConductorForm').submit();
+            });
+
+            // Asegurarse de que los botones de cierre funcionen correctamente
+            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    $(this).closest('.modal').modal('hide');
+                });
+            });
+        </script>
     </body>
 </html>
