@@ -12,7 +12,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/ruta")
@@ -43,9 +42,9 @@ public class RutaController {
     }
 
     @PostMapping("/guardar")
-    public String guardarRuta(@ModelAttribute("ruta") Ruta ruta, RedirectAttributes redirectAttributes) {
+    public String guardarRuta(@ModelAttribute("ruta") Ruta ruta) {
         rutaService.save(ruta);
-        redirectAttributes.addFlashAttribute("mensaje", "Ruta guardada correctamente.");
+        System.out.println(ruta.toString());
         return "redirect:/ruta";
     }
 

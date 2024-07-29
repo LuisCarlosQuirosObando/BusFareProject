@@ -4,6 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
         <title>BusFare</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
         <section th:fragment="listadoRutas">
@@ -46,11 +47,9 @@
                                                         <a th:href="@{/ruta/editar/}+${ruta.id_ruta}" class="btn btn-success me-2">
                                                             <i class="fas fa-pencil"></i> <span th:text="#{ruta.editar}">Editar</span>
                                                         </a>
-                                                        <form th:action="@{/ruta/eliminar/}+${ruta.id_ruta}" method="post" class="d-inline">
-                                                            <button type="submit" class="btn btn-danger">
-                                                                <i class="fas fa-trash"></i> <span th:text="#{ruta.eliminar}">Eliminar</span>
-                                                            </button>
-                                                        </form>
+                                                        <button type="button" class="btn btn-danger" onclick="setRutaId(${ruta.id_ruta})">
+                                                            <i class="fas fa-trash"></i> <span th:text="#{ruta.eliminar}">Eliminar</span>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -66,5 +65,58 @@
                 </div>
             </div>
         </section>
+
+        <!-- Modal de confirmación de eliminación -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea eliminar esta ruta?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id="deleteForm" method="post" th:action="@{/ruta/eliminar/__id__}" style="display:none;">
+            <input type="hidden" name="_method" value="delete">
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            var rutaId;
+
+            function setRutaId(id) {
+                rutaId = id;
+                $('#confirmDeleteModal').modal('show');
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var confirmDeleteButton = document.getElementById('confirmDeleteButton');
+                var deleteForm = document.getElementById('deleteForm');
+
+                confirmDeleteButton.addEventListener('click', function () {
+                    deleteForm.setAttribute('action', '/ruta/eliminar/' + rutaId);
+                    deleteForm.submit();
+                });
+            });
+
+            // botones de cierre
+            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    $(this).closest('.modal').modal('hide');
+                });
+            });
+        </script>
     </body>
 </html>

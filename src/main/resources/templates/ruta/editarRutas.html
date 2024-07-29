@@ -4,6 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="layout/plantilla :: head">
         <title>Editar Ruta</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"></header>
@@ -15,7 +16,7 @@
                             <h3 class="text-center" th:text="#{ruta.editar}">Editar</h3>
                         </div>
                         <div class="card-body">
-                            <form th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
+                            <form id="editarRutaForm" th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
                                 <input type="hidden" th:field="*{id_ruta}">
                                 <div class="mb-3">
                                     <label for="nombre_ruta" class="form-label">Nombre De La Ruta</label>
@@ -31,10 +32,10 @@
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
-                                        <label for="activo" class="form-check-label">Activo</label>
+                                    <label for="activo" class="form-check-label">Activo</label>
                                 </div>
                                 <div class="d-grid gap-2 d-md-block text-center">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="button" id="saveButton" class="btn btn-primary">Guardar</button>
                                     <a href="/ruta" class="btn btn-secondary">Cancelar</a>
                                 </div>
                             </form>
@@ -43,6 +44,73 @@
                 </div>
             </div>
         </div>
-        <footer th:replace="layout/plantilla :: footer"></footer>
+
+        <!-- Modal de confirmación -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea guardar los cambios en esta ruta?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="confirmButton">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de alerta de campos vacíos -->
+        <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="alertModalLabel">Campos incompletos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        No es posible continuar porque hay campos en blanco.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.getElementById('saveButton').addEventListener('click', function () {
+                var form = document.getElementById('editarRutaForm');
+                var valid = form.checkValidity();
+                if (valid) {
+                    $('#confirmModal').modal('show');
+                } else {
+                    $('#alertModal').modal('show');
+                }
+            });
+
+            document.getElementById('confirmButton').addEventListener('click', function () {
+                document.getElementById('editarRutaForm').submit();
+            });
+
+            // botones de cierre
+            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    $(this).closest('.modal').modal('hide');
+                });
+            });
+        </script>
     </body>
 </html>
+
