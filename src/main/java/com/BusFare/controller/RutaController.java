@@ -24,7 +24,7 @@ public class RutaController {
     public String listarRutas(Model model) {
         List<Ruta> rutas = rutaService.findAll();
         model.addAttribute("rutas", rutas);
-        return "ruta/ruta"; 
+        return "ruta/ruta";
     }
 
     @GetMapping("/agregar")

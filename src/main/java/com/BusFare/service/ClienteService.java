@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClienteService {
@@ -27,5 +28,10 @@ public class ClienteService {
     
      public void eliminarCliente(Long id) {
         clienteDao.deleteById(id);
+    }
+     
+    @Transactional(readOnly = true)
+    public List<Cliente> findByActivoTrue() {
+        return clienteDao.findByActivoTrue();
     }
 }

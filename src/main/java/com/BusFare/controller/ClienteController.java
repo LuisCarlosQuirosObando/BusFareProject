@@ -1,4 +1,3 @@
-
 package com.BusFare.controller;
 
 import com.BusFare.domain.Cliente;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/cliente")
 public class ClienteController {
+
     @Autowired
     private ClienteService clienteService;
 
@@ -23,7 +23,14 @@ public class ClienteController {
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.findAll();
         model.addAttribute("clientes", clientes);
-        return "cliente/cliente"; 
+        return "cliente/cliente";
+    }
+
+    @GetMapping("/agregar")
+    public String mostrarFormularioAgregar(Model model) {
+        Cliente nuevoCliente = new Cliente();
+        model.addAttribute("cliente", nuevoCliente);
+        return "cliente/agregarCliente";
     }
 
     @GetMapping("/editar/{id}")
@@ -36,12 +43,13 @@ public class ClienteController {
     @PostMapping("/guardar")
     public String guardarCliente(@ModelAttribute("cliente") Cliente cliente) {
         clienteService.save(cliente);
+        System.out.println(cliente.toString());
         return "redirect:/cliente";
     }
 
-     @PostMapping("/cliente/eliminar/{id}")
+    @PostMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable("id") Long id, Model model) {
         clienteService.eliminarCliente(id);
-        return "redirect:/cliente"; 
+        return "redirect:/cliente";
     }
 }
