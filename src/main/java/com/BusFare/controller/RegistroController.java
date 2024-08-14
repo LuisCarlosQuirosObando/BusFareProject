@@ -25,8 +25,9 @@ public class RegistroController  {
     }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirectAttributes) {
-        usuarioService.guardarUsuario(usuario);
+    public String guardarUsuario(String usuario, String contrasena, String nombre, String apellidos, String correo, boolean activo, RedirectAttributes redirectAttributes) {
+        Usuario user = new Usuario(usuario, contrasena, nombre, apellidos, correo, activo);
+        usuarioService.guardarUsuario(user);
         redirectAttributes.addFlashAttribute("mensaje", "Usuario registrado exitosamente");
         return "redirect:/"; 
     }
