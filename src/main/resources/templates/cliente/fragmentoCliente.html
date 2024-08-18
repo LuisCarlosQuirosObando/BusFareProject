@@ -93,7 +93,9 @@
                 </div>
             </div>
             <form id="deleteForm" method="post" style="display:none;"></form>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script>
                                 function setClienteId(id) {
                                     document.getElementById("deleteForm").action = "/cliente/eliminar/" + id;
@@ -103,8 +105,8 @@
                                 }
                                 function filterByStatus() {
                                     const status = document.getElementById('statusFilter').value;
-                                    if (status === 'all') {
-                                        window.location.href = '/cliente';  // Redirige al listado completo de clientes
+                                    if (status === 'todos') {
+                                        window.location.href = '/cliente';
                                     } else {
                                         window.location.href = `/cliente/filtrar/${status}`;
                                     }
