@@ -23,6 +23,7 @@ public class ClienteController {
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.findAll();
         model.addAttribute("clientes", clientes);
+        model.addAttribute("status", "todos");  // Establecer "all" como el valor por defecto para el dropdown
         return "cliente/cliente";
     }
 
@@ -52,4 +53,22 @@ public class ClienteController {
         clienteService.eliminarCliente(id);
         return "redirect:/cliente";
     }
+
+    @GetMapping("/filtrar/{status}")
+    public String filtrarClientesPorStatus(@PathVariable("status") String status, Model model) {
+        List<Cliente> clientes;
+
+        if ("active".equalsIgnoreCase(status)) {
+            clientes = clienteService.findByActivoTrue();
+        } else if ("inactive".equalsIgnoreCase(status)) {
+            clientes = clienteService.findByActivoFalse();
+        } else {
+            clientes = clienteService.findAll();
+        }
+
+        model.addAttribute("clientes", clientes);
+        model.addAttribute("status", status);  // Añadir el estado actual al modelo
+        return "cliente/cliente";
+    }
+
 }

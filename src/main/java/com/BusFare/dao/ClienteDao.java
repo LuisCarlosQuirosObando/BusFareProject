@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ClienteDao extends JpaRepository<Cliente, Long> {
 
     public List<Cliente> findByActivoTrue();
+    public List<Cliente> findByActivoFalse();  // Nuevo método
 }

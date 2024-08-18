@@ -15,6 +15,15 @@
                                 onmouseover="this.style.backgroundColor = '#0DCAF0'; this.style.color = '#FFFFFF'" 
                                 onmouseout="this.style.backgroundColor = '#FFFFFF'; this.style.color = 'black'">
                             Agregar
+                        </button>
+                        <div class="d-inline-block ms-3">
+                            <label for="statusFilter">Filtrar por estado:</label>
+                            <select id="statusFilter" onchange="filterByStatus()">
+                                <option value="all" th:selected="${status == null}">Todos</option>
+                                <option value="active" th:selected="${status == 'active'}">Activos</option>
+                                <option value="inactive" th:selected="${status == 'inactive'}">Inactivos</option></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -84,33 +93,22 @@
                 </div>
             </div>
             <form id="deleteForm" method="post" style="display:none;"></form>
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
             <script>
-                                    var clienteId;
-
-                                    function setClienteId(id) {
-                                        clienteId = id;
-                                        $('#confirmDeleteModal').modal('show');
+                                function setClienteId(id) {
+                                    document.getElementById("deleteForm").action = "/cliente/eliminar/" + id;
+                                    document.getElementById("confirmDeleteButton").onclick = function () {
+                                        document.getElementById("deleteForm").submit();
+                                    };
+                                }
+                                function filterByStatus() {
+                                    const status = document.getElementById('statusFilter').value;
+                                    if (status === 'all') {
+                                        window.location.href = '/cliente';  // Redirige al listado completo de clientes
+                                    } else {
+                                        window.location.href = `/cliente/filtrar/${status}`;
                                     }
-
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        var confirmDeleteButton = document.getElementById('confirmDeleteButton');
-                                        var deleteForm = document.getElementById('deleteForm');
-
-                                        confirmDeleteButton.addEventListener('click', function () {
-                                            deleteForm.setAttribute('action', '/cliente/eliminar/' + clienteId);
-                                            deleteForm.submit();
-                                        });
-                                    });
-
-                                    // botones de cierre
-                                    document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
-                                        button.addEventListener('click', function () {
-                                            $(this).closest('.modal').modal('hide');
-                                        });
-                                    });
+                                }
             </script>
         </section>
     </body>
