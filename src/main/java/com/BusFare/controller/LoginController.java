@@ -28,7 +28,7 @@ public class LoginController {
     @Autowired
     private AdministradorService administradorService;
 
-    @PostMapping("/principal")
+    @PostMapping("/login")
     public String login(@RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("role") String role,
@@ -52,7 +52,7 @@ public class LoginController {
                     isValidUser = usuarioService.validarCredenciales(username, password);
                 }
                 if (isValidUser) {
-                    return "redirect:/principal";
+                    return "redirect:/monedero";
                 } else {
                     redirectAttributes.addFlashAttribute("error", "Usuario o contraseña incorrectos");
                 }
