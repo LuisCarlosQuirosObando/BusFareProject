@@ -4,7 +4,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
         <title>BusFare</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
         <section th:fragment="listadoRutas">
@@ -27,7 +26,7 @@
                                     <table class="table table-striped table-hover mx-auto">
                                         <thead class="table-dark">
                                             <tr>
-                                                <th th:text="#{ruta.identificacion}">Identificación</th>
+                                                <th th:text="#{ruta.identificacion}">Id Ruta</th>
                                                 <th th:text="#{ruta.nombre}">Nombre</th>
                                                 <th th:text="#{ruta.provincia}">Provincia</th>
                                                 <th th:text="#{ruta.cantidadEstaciones}">Cantidad Estaciones</th>
@@ -37,17 +36,17 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="ruta : ${rutas}">
-                                                <td th:text="${ruta.id_ruta}">1</td>
-                                                <td th:text="${ruta.nombre_ruta}">Bus</td>
-                                                <td th:text="${ruta.provincia}">Heredia</td>
-                                                <td th:text="${ruta.cantidad_estaciones}">15</td>
+                                                <td th:text="${ruta.idRuta}"></td>
+                                                <td th:text="${ruta.nombre_ruta}"></td>
+                                                <td th:text="${ruta.provincia}"></td>
+                                                <td th:text="${ruta.cantidad_estaciones}"></td>
                                                 <td th:text="${ruta.activo} ? #{ruta.activo} : #{ruta.inactivo}">Activo</td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center">
-                                                        <a th:href="@{/ruta/editar/}+${ruta.id_ruta}" class="btn btn-success me-2">
+                                                        <a th:href="@{/ruta/editar/}+${ruta.idRuta}" class="btn btn-success me-2">
                                                             <i class="fas fa-pencil"></i> <span th:text="#{ruta.editar}">Editar</span>
                                                         </a>
-                                                        <button type="button" class="btn btn-danger" onclick="setRutaId(${ruta.id_ruta})">
+                                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" th:onclick="'setRutaId(' + ${ruta.idRuta} + ')'">
                                                             <i class="fas fa-trash"></i> <span th:text="#{ruta.eliminar}">Eliminar</span>
                                                         </button>
                                                     </div>
@@ -58,65 +57,43 @@
                                 </div>
                             </div>
                             <div class="text-center p-2" th:if="${rutas == null or rutas.empty}">
-                                <span th:text="#{ruta.noDisponible}">No hay rutas disponibles.</span>
+                                <span th:text="#{rutas.noDisponible}">No hay rutas disponibles.</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Modal de confirmación de eliminación -->
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ¿Está seguro de que desea eliminar esta ruta?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro de que desea eliminar esta ruta?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form id="deleteForm" method="post" th:action="@{/ruta/eliminar/__id__}" style="display:none;">
-            <input type="hidden" name="_method" value="delete">
-        </form>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            var rutaId;
-
-            function setRutaId(id) {
-                rutaId = id;
-                $('#confirmDeleteModal').modal('show');
-            }
-
-            document.addEventListener('DOMContentLoaded', function () {
-                var confirmDeleteButton = document.getElementById('confirmDeleteButton');
-                var deleteForm = document.getElementById('deleteForm');
-
-                confirmDeleteButton.addEventListener('click', function () {
-                    deleteForm.setAttribute('action', '/ruta/eliminar/' + rutaId);
-                    deleteForm.submit();
-                });
-            });
-
-            // botones de cierre
-            document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    $(this).closest('.modal').modal('hide');
-                });
-            });
-        </script>
+            <form id="deleteForm" method="post" style="display:none;"></form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                                    function setRutaId(id) {
+                                        document.getElementById("deleteForm").action = "/ruta/eliminar/" + id;
+                                        document.getElementById("confirmDeleteButton").onclick = function () {
+                                            document.getElementById("deleteForm").submit();
+                                        };
+                                    }
+            </script>
+        </section>
     </body>
 </html>

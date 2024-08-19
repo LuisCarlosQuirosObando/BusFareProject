@@ -1,4 +1,3 @@
-
 package com.BusFare.dao;
 
 import com.BusFare.domain.Ruta;

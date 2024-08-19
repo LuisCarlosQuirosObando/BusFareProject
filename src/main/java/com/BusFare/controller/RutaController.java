@@ -16,29 +16,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/ruta")
 public class RutaController {
-
+    
     @Autowired
     private RutaService rutaService;
-
+    
     @GetMapping
     public String listarRutas(Model model) {
         List<Ruta> rutas = rutaService.findAll();
         model.addAttribute("rutas", rutas);
-        return "ruta/ruta";
+        return "ruta/ruta"; 
     }
-
+    
     @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
-        Ruta nuevaRuta = new Ruta();
-        model.addAttribute("ruta", nuevaRuta);
-        return "ruta/agregarRutas";
+        Ruta nuevoRuta = new Ruta();
+        model.addAttribute("ruta", nuevoRuta);
+        return "ruta/agregarRuta";
     }
-
+    
     @GetMapping("/editar/{id}")
     public String editarRuta(@PathVariable("id") Long id, Model model) {
         Ruta ruta = rutaService.findById(id);
         model.addAttribute("ruta", ruta);
-        return "ruta/editarRutas";
+        return "ruta/editarRuta";
     }
 
     @PostMapping("/guardar")
@@ -49,7 +49,7 @@ public class RutaController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarRuta(@PathVariable("id") Long id) {
+    public String eliminarRuta(@PathVariable("id") Long id, Model model) {
         rutaService.eliminarRuta(id);
         return "redirect:/ruta";
     }

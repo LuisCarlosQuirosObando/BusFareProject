@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>Agregar Ruta</title>
+    <head th:replace="layout/plantilla :: head">
+        <title>Editar Ruta</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
-        <header th:replace="~{layout/plantilla :: header}"></header>
+        <header th:replace="layout/plantilla :: header"></header>
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-10">
+                <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header text-center">
-                            <h3 th:text="#{ruta.agregar}">Agregar Ruta</h3>
+                        <div class="card-header">
+                            <h3 class="text-center" th:text="#{ruta.editar}">Editar</h3>
                         </div>
                         <div class="card-body">
-                            <form id="agregarRutaForm" th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
-                                <div class="mb-3">
-                                    <label for="nombre_ruta" class="form-label">Nombre De La Ruta</label>
-                                    <input type="text" id="nombre_ruta" class="form-control" th:field="*{nombre_ruta}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="provincia" class="form-label">Provincia</label>
-                                    <input type="text" id="provincia" class="form-control" th:field="*{provincia}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="cantidad_estaciones" class="form-label">Cantidad De Estaciones</label>
-                                    <input type="number" id="cantidad_estaciones" class="form-control" th:field="*{cantidad_estaciones}" required>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
-                                    <label for="activo" class="form-check-label">Activo</label>
-                                </div>
-                                <div class="d-grid gap-2 d-md-block text-center">
-                                    <button type="button" id="saveButton" class="btn btn-primary">Guardar</button>
-                                    <a href="/ruta" class="btn btn-secondary">Cancelar</a>
-                                </div>
+                            <form id="editarRutaForm" th:action="@{/ruta/guardar}" th:object="${ruta}" method="post">
+                                <input type="hidden" th:field="*{idRuta}">
+                                    <div class="mb-3">
+                                        <label for="nombre_ruta" class="form-label" th:text="#{ruta.nombre}">Nombre De La Ruta</label>
+                                        <input type="text" id="nombre_ruta" class="form-control" th:field="*{nombre_ruta}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="provincia" class="form-label" th:text="#{ruta.provincia}">Provincia</label>
+                                        <input type="text" id="provincia" class="form-control" th:field="*{provincia}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cantidad_estaciones" class="form-label" th:text="#{ruta.cantidadEstaciones}">Cantidad De Estaciones</label>
+                                        <input type="number" id="cantidad_estaciones" class="form-control" th:field="*{cantidad_estaciones}" required>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" id="activo" class="form-check-input" th:field="*{activo}">
+                                            <label for="activo" class="form-check-label">Activo</label>
+                                    </div>
+                                    <div class="d-grid gap-2 d-md-block text-center">
+                                        <button type="button" id="saveButton" class="btn btn-primary">Guardar</button>
+                                        <a href="/ruta" class="btn btn-secondary">Cancelar</a>
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ¿Está seguro de que desea agregar esta ruta?
+                        ¿Está seguro de que desea guardar los cambios en esta ruta?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -90,7 +90,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById('saveButton').addEventListener('click', function () {
-                var form = document.getElementById('agregarRutaForm');
+                var form = document.getElementById('editarRutaForm');
                 var valid = form.checkValidity();
                 if (valid) {
                     $('#confirmModal').modal('show');
@@ -100,9 +100,10 @@
             });
 
             document.getElementById('confirmButton').addEventListener('click', function () {
-                document.getElementById('agregarRutaForm').submit();
+                document.getElementById('editarRutaForm').submit();
             });
 
+            // botones de cierre
             document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
                 button.addEventListener('click', function () {
                     $(this).closest('.modal').modal('hide');

@@ -1,14 +1,10 @@
-
 package com.BusFare.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.io.Serializable;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "rutas")
 public class Ruta implements Serializable {
@@ -18,20 +14,20 @@ public class Ruta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ruta")
-    private int id_ruta;
+    private Long idRuta;
     private String nombre_ruta;
     private String provincia;
     private int cantidad_estaciones;
     private boolean activo;
 
-    
-
-    public int getId_ruta() {
-        return id_ruta;
+    public Ruta() {
     }
 
-    public void setId_ruta(int id_ruta) {
-        this.id_ruta = id_ruta;
+    public Ruta(String nombre_ruta, String provincia, int cantidad_estaciones, boolean activo) {
+        this.nombre_ruta = nombre_ruta;
+        this.provincia = provincia;
+        this.cantidad_estaciones = cantidad_estaciones;
+        this.activo = activo;
     }
 
     public String getNombre_ruta() {
@@ -65,4 +61,7 @@ public class Ruta implements Serializable {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    
+
 }    
