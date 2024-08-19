@@ -4,6 +4,8 @@ import com.BusFare.domain.Usuario;
 import com.BusFare.service.UsuarioService;
 import com.BusFare.domain.Administrador;
 import com.BusFare.service.AdministradorService;
+import com.BusFare.service.CorreoService;
+import jakarta.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class LoginController {
 
     @Autowired
     private AdministradorService administradorService;
+    
+    @Autowired
+    private CorreoService correoService;
 
     @PostMapping("/login")
     public String login(@RequestParam("username") String username,
@@ -40,7 +45,7 @@ public class LoginController {
         if ("usuario".equalsIgnoreCase(role)) {
             user = usuarioService.findByUsuario(username);
         } else if ("administrador".equalsIgnoreCase(role)) {
-            user1 = administradorService.findByUsuario(username); 
+            user1 = administradorService.findByUsuario(username);
         }
 
         if (user != null) {
@@ -77,6 +82,22 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("error", "Usuario o contraseña incorrectos");
         }
         return "redirect:/?error";
+    }
+
+
+    @PostMapping("/enviarCorreo")
+    public String enviarCorreo( RedirectAttributes redirectAttributes) {
+        try {
+            String asunto = "Solicitud de desbloqueo de cuenta";
+            String contenidoHtml = "<p>Hola, por favor ayudeme a activar mi cuenta.</p>";
+
+            correoService.enviarCorreoHtml("sbusfare@gmail.com", asunto, contenidoHtml);
+
+            redirectAttributes.addFlashAttribute("mensaje", "Correo enviado con éxito.");
+        } catch (MessagingException e) {
+            redirectAttributes.addFlashAttribute("error", "No se pudo enviar el correo. Inténtelo nuevamente más tarde.");
+        }
+        return "redirect:/";
     }
 
 }
