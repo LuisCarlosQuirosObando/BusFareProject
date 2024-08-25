@@ -44,7 +44,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="cliente : ${clientes}">
+                                            <tr th:each="cliente : ${clientes}" 
+                                                th:class="${cliente.idUser} == ${clienteSeleccionado?.idUser} ? 'table-info' : ''">
                                                 <td th:text="${cliente.idUser}"></td>
                                                 <td th:text="${cliente.usuario}"></td>
                                                 <td th:text="${cliente.nombre}"></td>
@@ -53,6 +54,9 @@
                                                 <td th:text="${cliente.activo} ? #{clientes.activo} : #{clientes.inactivo}">Activo</td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center">
+                                                        <a th:href="@{/cliente/seleccionar/{id}(id=${cliente.idUser})}" class="btn btn-info me-2">
+                                                            <i class="fas fa-eye"></i> <span>Seleccionar</span>
+                                                        </a>
                                                         <a th:href="@{/cliente/editar/}+${cliente.idUser}" class="btn btn-success me-2">
                                                             <i class="fas fa-pencil"></i> <span th:text="#{clientes.editar}">Editar</span>
                                                         </a>
@@ -65,6 +69,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                             <div class="text-center p-2" th:if="${clientes == null or clientes.empty}">
                                 <span th:text="#{clientes.noDisponible}">No hay clientes disponibles.</span>

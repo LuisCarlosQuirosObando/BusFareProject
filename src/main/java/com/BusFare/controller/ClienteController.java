@@ -49,9 +49,10 @@ public class ClienteController {
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable("id") Long id, Model model) {
+    public String eliminarCliente(@PathVariable("id") Long id) {
         clienteService.eliminarCliente(id);
         return "redirect:/cliente";
+
     }
 
     @GetMapping("/filtrar/{status}")
@@ -68,6 +69,15 @@ public class ClienteController {
 
         model.addAttribute("clientes", clientes);
         model.addAttribute("status", status);  // Añadir el estado actual al modelo
+        return "cliente/cliente";
+    }
+
+    @GetMapping("/seleccionar/{id}")
+    public String seleccionarCliente(@PathVariable("id") Long id, Model model) {
+        List<Cliente> clientes = clienteService.findAll();
+        Cliente clienteSeleccionado = clienteService.findById(id);
+        model.addAttribute("clientes", clientes);
+        model.addAttribute("clienteSeleccionado", clienteSeleccionado);
         return "cliente/cliente";
     }
 
