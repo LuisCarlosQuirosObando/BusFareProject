@@ -54,10 +54,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario findByUsuario(String usuario) {
         return usuarioDao.findByUsuario(usuario);
     }
-
-    //método para obtener un usuario por su ID
+    
+     //método para obtener un usuario por su ID
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioDao.findById(id).orElse(null);
     }
-
+     
 }

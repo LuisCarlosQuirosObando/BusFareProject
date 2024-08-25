@@ -40,7 +40,7 @@ public class MonederoController {
 
     @PostMapping("/recargar")
     public String recargarMonedero(@RequestParam("monto") double monto) {
-        Long usuarioId = 1L; 
+        Long usuarioId = 1L;
 
         Usuario usuario = usuarioService.obtenerUsuarioPorId(usuarioId);
         Monedero monedero = monederoService.obtenerMonederoPorUsuario(usuario);
@@ -52,4 +52,5 @@ public class MonederoController {
 
         return "redirect:/monedero";
     }
+
 }
