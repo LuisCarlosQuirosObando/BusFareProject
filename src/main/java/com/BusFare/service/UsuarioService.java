@@ -7,4 +7,7 @@ public interface UsuarioService {
      void incrementarIntentosFallidos(Usuario usuario);
      void desactivarUsuario(Usuario usuario);
      Usuario findByUsuario(String usuario);
+
+    public Usuario obtenerUsuarioPorId(Long usuarioId);
+
 }

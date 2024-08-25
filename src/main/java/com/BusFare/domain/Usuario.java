@@ -13,8 +13,8 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private Long idUser;
+    @Column(name = "id_usuario")
+    private Long idUsuario;
     
     
     private String usuario;
@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
     private String apellidos;
     private String correo;
     private boolean activo;
-    private int intentosFallidos;
+//    private int intentosFallidos;
 
     public Usuario() {
     }
@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
         this.apellidos = apellidos;
         this.correo = correo;
         this.activo = activo;
-        this.intentosFallidos=0;
+//        this.intentosFallidos=0;
     }
     
       

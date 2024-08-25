@@ -2,10 +2,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head th:replace="layout/plantilla :: head">
+        <title>Monedero</title>
     </head>
     <body>
         <header th:replace="vistasCliente/plantilla :: header"/>
-        
+
+        <div class="container mt-5">
+            <h2>Datos Personales</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" class="form-control" th:value="${usuario.nombre}" readonly>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="apellidos">Apellidos:</label>
+                        <input type="text" id="apellidos" class="form-control" th:value="${usuario.apellidos}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" class="form-control" th:value="${usuario.correo}" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h3 class="text-center">Saldo</h3>
+                    <p class="lead text-center display-4" th:text="'₡ ' + ${monedero.saldo}"></p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Recargar Monedero</h3>
+                    <form action="/monedero/recargar" method="post">
+                        <div class="form-group">
+                            <label for="monto">Monto:</label>
+                            <input type="number" id="monto" name="monto" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">Recargar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <footer th:replace="vistasCliente/plantilla :: footer" />
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
