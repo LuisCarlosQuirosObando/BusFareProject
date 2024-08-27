@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout/plantilla :: head">
+        <title>Agregar Administrador</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <section th:replace="administrador/fragmentos :: botonesAgregar"></section>
+
+        <section th:replace="administrador/fragmentos :: agregarAdministrador"></section>
+
+        <section th:replace="administrador/fragmentos :: listadoAdministradores"></section>
+
+        <footer th:replace="layout/plantilla :: footer" />
+    </body>
+</html>
