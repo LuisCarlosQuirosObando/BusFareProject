@@ -23,5 +23,5 @@ public interface AdministradorService {
 //     Se actualiza un administrador si el id del administrador NO esta vacío
     public void save(Administrador administrador);
 
-
+    public void delete(Administrador administrador);
 }

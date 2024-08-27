@@ -66,9 +66,7 @@
             </div>
         </section>
 
-
-
-        <!-- 3 Sección principal para mostrar la informaccion de la entidad administrador -->
+        <!-- 3 Sección principal para mostrar la informacción de la entidad administrador -->
         <section th:fragment="listadoAdministradores">
             <div class="container">
                 <div class="row justify-content-center">
@@ -83,7 +81,8 @@
                                         <tr>
                                             <th>[[#{administrador.idAdministrador}]]</th>                                         
                                             <th>[[#{administrador.usuario}]]</th>
-                                            <th>[[#{administrador.activo}]]</th>    
+                                            <th>[[#{administrador.activo}]]</th>
+                                            <th>[[#{accion.eliminar}]]</th>    
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +90,12 @@
                                             <td>[[${administrador.idAdministrador}]]</td>
                                             <td>[[${administrador.usuario}]]</td>
                                             <td th:text="${administrador.activo} ? 'Activa' : 'Inactiva'"></td>
-                                           
+                                            <td>
+                                                <a th:href="@{/nuevoAdmin/eliminar/}+${administrador.idAdministrador}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -107,3 +111,4 @@
 
     </body>
 </html>
+ F

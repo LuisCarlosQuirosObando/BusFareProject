@@ -66,4 +66,10 @@ public class AdministradorServiceImpl implements AdministradorService {
         administradorDao.save(administrador);
     }
 
+    @Override
+    @Transactional
+    public void delete(Administrador administrador) {
+        administradorDao.delete(administrador);
+    }
+
 }

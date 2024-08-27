@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,6 +29,14 @@ public class AdministradorController {
     @PostMapping("/guardar")
     public String administradorGuardar(Administrador administrador) {
         administradorService.save(administrador);
+        return "redirect:/nuevoAdmin/listado";
+    }
+
+    @GetMapping("/eliminar/{idAdministrador}")
+    public String administradorEliminar(@PathVariable("idAdministrador") Long idAdministrador) {
+        Administrador administrador = new Administrador();
+        administrador.setIdAdministrador(idAdministrador);
+        administradorService.delete(administrador);
         return "redirect:/nuevoAdmin/listado";
     }
 
