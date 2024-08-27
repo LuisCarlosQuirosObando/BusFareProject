@@ -23,7 +23,7 @@ public class ClienteController {
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.findAll();
         model.addAttribute("clientes", clientes);
-        model.addAttribute("status", "todos");  // Establecer "all" como el valor por defecto para el dropdown
+        model.addAttribute("status", "todos"); 
         return "cliente/cliente";
     }
 
@@ -68,7 +68,7 @@ public class ClienteController {
         }
 
         model.addAttribute("clientes", clientes);
-        model.addAttribute("status", status);  // Añadir el estado actual al modelo
+        model.addAttribute("status", status); 
         return "cliente/cliente";
     }
 

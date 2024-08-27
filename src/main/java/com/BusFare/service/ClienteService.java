@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClienteService {
-    
+
     @Autowired
     private ClienteDao clienteDao;
 
@@ -25,17 +25,16 @@ public class ClienteService {
     public void save(Cliente cliente) {
         clienteDao.save(cliente);
     }
-    
+
     public void eliminarCliente(Long id) {
         clienteDao.deleteById(id);
     }
-     
+
     @Transactional(readOnly = true)
     public List<Cliente> findByActivoTrue() {
         return clienteDao.findByActivoTrue();
     }
 
-    // Nuevo método para encontrar clientes inactivos
     @Transactional(readOnly = true)
     public List<Cliente> findByActivoFalse() {
         return clienteDao.findByActivoFalse();

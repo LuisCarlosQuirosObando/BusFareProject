@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    
+
     @RequestMapping("/principal")
     public String page(Model model) {
         model.addAttribute("attribute", "value");
         return "index";
     }
-    
+
 }

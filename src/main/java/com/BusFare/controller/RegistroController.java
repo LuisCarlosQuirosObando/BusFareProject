@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/registro")
-public class RegistroController  {
+public class RegistroController {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -29,6 +29,6 @@ public class RegistroController  {
         Usuario user = new Usuario(usuario, contrasena, nombre, apellidos, correo, activo);
         usuarioService.guardarUsuario(user);
         redirectAttributes.addFlashAttribute("mensaje", "Usuario registrado exitosamente");
-        return "redirect:/"; 
+        return "redirect:/";
     }
 }

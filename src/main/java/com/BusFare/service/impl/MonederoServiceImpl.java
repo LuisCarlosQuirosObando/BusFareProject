@@ -36,11 +36,11 @@ public class MonederoServiceImpl implements MonederoService {
     @Override
     @Transactional
     public void guardarMonedero(Monedero monedero) {
-        monederoDao.save(monedero);  
+        monederoDao.save(monedero);
     }
 
     @Override
     public Monedero obtenerMonederoPorUsuarioId(Long idUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

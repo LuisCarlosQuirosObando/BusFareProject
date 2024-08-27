@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class QrController {
-    
+
     @RequestMapping("/qr")
     public String page(Model model) {
         model.addAttribute("attribute", "value");
         return "vistasCliente/verQr";
     }
-    
+
 }

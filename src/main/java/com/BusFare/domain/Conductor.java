@@ -1,4 +1,3 @@
-
 package com.BusFare.domain;
 
 import jakarta.persistence.Column;

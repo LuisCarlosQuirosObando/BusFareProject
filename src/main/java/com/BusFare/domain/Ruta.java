@@ -62,6 +62,4 @@ public class Ruta implements Serializable {
         this.activo = activo;
     }
 
-    
-
-}    
+}

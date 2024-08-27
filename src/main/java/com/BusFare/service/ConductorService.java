@@ -21,7 +21,7 @@ public class ConductorService {
         return conductorDao.findById(id).orElse(null);
     }
 
-    public void save(Conductor conductor) {      
+    public void save(Conductor conductor) {
         conductorDao.save(conductor);
     }
 

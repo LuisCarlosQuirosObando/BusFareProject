@@ -6,7 +6,6 @@ import com.BusFare.domain.Administrador;
 import com.BusFare.service.AdministradorService;
 import com.BusFare.service.CorreoService;
 import jakarta.mail.MessagingException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +28,7 @@ public class LoginController {
 
     @Autowired
     private AdministradorService administradorService;
-    
+
     @Autowired
     private CorreoService correoService;
 
@@ -84,9 +83,8 @@ public class LoginController {
         return "redirect:/?error";
     }
 
-
     @PostMapping("/enviarCorreo")
-    public String enviarCorreo( RedirectAttributes redirectAttributes) {
+    public String enviarCorreo(RedirectAttributes redirectAttributes) {
         try {
             String asunto = "Solicitud de desbloqueo de cuenta";
             String contenidoHtml = "<p>Hola, por favor ayudeme a activar mi cuenta.</p>";

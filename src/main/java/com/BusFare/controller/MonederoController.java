@@ -24,7 +24,7 @@ public class MonederoController {
 
     @GetMapping
     public String mostrarMonedero(Model model) {
-        Long usuarioId = 1L; 
+        Long usuarioId = 1L;
         Usuario usuario = usuarioService.obtenerUsuarioPorId(usuarioId);
         Monedero monedero = monederoService.obtenerMonederoPorUsuario(usuario);
 
